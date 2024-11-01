@@ -10,8 +10,8 @@ const BookDetails = () => {
     const data = useLoaderData();
 
 
-    console.log(data);
-    console.log(typeof bookId, typeof id, typeof data[0].bookId);
+    // console.log(data);
+    // console.log(typeof bookId, typeof id, typeof data[0].bookId);
 
 
     const book = data.find(book => book.bookId === id);
@@ -24,7 +24,7 @@ const BookDetails = () => {
     // // console.log(bookId);
 
     const handleMarkAsRead = (id) => {
-        console.log('mark as read btn clicked');
+        // console.log('mark as read btn clicked');
         addToStoredList(id)
     }
 
