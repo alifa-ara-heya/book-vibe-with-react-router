@@ -6,7 +6,7 @@ import { getStoredList } from '../../Utility/AddToDB';
 import Book from '../Book/Book';
 
 const ListedBooks = () => {
-
+    const [sort, setSort] = useState("")
     const [readList, setReadList] = useState([]);
     const allBooks = useLoaderData(); //ideally we will get the read book list from the database.
 
@@ -22,8 +22,35 @@ const ListedBooks = () => {
         console.log(readList);
     }, [])
 
+
+    const handleSort = sortType => {
+        setSort(sortType);
+
+        // 
+
+        if (sortType === 'Number of Pages'){
+            const sortedReadList = [...readList].sort((a, b)=> a.totalPages - b.totalPages);
+            setReadList(sortedReadList);
+        }
+
+        if (sortType === 'Ratings'){
+            const sortedReadList = [...readList].sort((a,b)=> a.rating - b.rating);
+            setReadList(sortedReadList);
+        }
+    }
     return (
         <div>
+            {/* dropdown menu */}
+            <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn m-1">{sort? `Sort by: ${sort}`:'Sort By' } </div>
+                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    <li onClick={()=>handleSort('Ratings')}><a>Ratings</a></li>
+                    <li onClick={() => handleSort('Number of Pages')}><a>Sort by number of pages</a></li>
+                </ul>
+            </div>
+            {/* dropdown menu ends */}
+
+
             <h3 className='text-3xl my-8'>Listed Books</h3>
 
             <Tabs>
