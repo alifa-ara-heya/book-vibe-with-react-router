@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Book = ({ book }) => {
-    const { bookId, image, bookName, author, tags, category } = book;
+    const { bookId, image, bookName, author, tags, category, rating, totalPages } = book;
     return (
         <Link to={`/books/${bookId}`}>
             <div className="card bg-base-100 w-96 shadow-xl p-6">
@@ -13,7 +13,7 @@ const Book = ({ book }) => {
                 <div className="card-body">
                     <div className="flex gap-3 justify-center">
                         {
-                            tags.map(tag => <button className="btn btn-xs bg-green-300 text-green-900">{tag}</button>)
+                            tags.map((tag, idx) => <button key={idx} className="btn btn-xs bg-green-300 text-green-900">{tag}</button>)
                         }
                     </div>
                     <h2 className="card-title">
@@ -25,8 +25,10 @@ const Book = ({ book }) => {
                     <div className="border border-dashed border-gray-600"></div>
                     <div className="card-actions justify-between pt-4 items-center">
                         <div className="badge badge-outline">{category} </div>
-                        <div className="">
-                            <div className="rating flex justify-center items-center">
+                        <div>{rating}</div>
+                        <div>{totalPages}</div>
+                        
+                            <div className="rating">
                                 <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400 h-5" />
                                 <input
                                     type="radio"
@@ -40,7 +42,7 @@ const Book = ({ book }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </Link>
     );
 };
